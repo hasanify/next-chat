@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
-import Button from "../../components/ui/Button";
+import Button from "@/components/ui/Button";
 
 import { Montserrat } from "next/font/google";
 import { signIn } from "next-auth/react";
