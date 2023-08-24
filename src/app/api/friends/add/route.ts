@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { addFriendValidator } from "@/lib/validations/add-friend";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
+import { pusherServer } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
@@ -55,7 +57,18 @@ export async function POST(req: Request) {
         status: 400,
       });
     }
+
+    await pusherServer.trigger(
+      toPusherKey(`user:${idToAdd}:incoming_friend_requests`),
+      "incoming_friend_requests",
+      {
+        senderId: session.user.id,
+        senderEmail: session.user.email,
+      }
+    );
+
     db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id);
+
     return new Response("OK");
   } catch (error) {
     if (error instanceof z.ZodError) {

@@ -8,25 +8,25 @@ import Image from "next/image";
 import Messages from "@/components/Messages";
 import ChatInput from "@/components/ChatInput";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { chatId: string };
-// }) {
-//   const session = await getServerSession(authOptions);
-//   if (!session) notFound();
-//   const [userId1, userId2] = params.chatId.split("--");
-//   const { user } = session;
+export async function generateMetadata({
+  params,
+}: {
+  params: { chatId: string };
+}) {
+  const session = await getServerSession(authOptions);
+  if (!session) notFound();
+  const [userId1, userId2] = params.chatId.split("--");
+  const { user } = session;
 
-//   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
-//   const chatPartnerRaw = (await fetchRedis(
-//     "get",
-//     `user:${chatPartnerId}`
-//   )) as string;
-//   const chatPartner = JSON.parse(chatPartnerRaw) as User;
+  const chatPartnerId = user.id === userId1 ? userId2 : userId1;
+  const chatPartnerRaw = (await fetchRedis(
+    "get",
+    `user:${chatPartnerId}`
+  )) as string;
+  const chatPartner = JSON.parse(chatPartnerRaw) as User;
 
-//   return { title: `NextChat | ${chatPartner.name}` };
-// }
+  return { title: `NextChat | ${chatPartner.name}` };
+}
 
 interface PageProps {
   params: {
