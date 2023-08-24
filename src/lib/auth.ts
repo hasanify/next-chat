@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     redirect() {
-      return "/dashboard";
+      return `${process.env.BASE_PATH}/dashboard`;
     },
   },
 };
