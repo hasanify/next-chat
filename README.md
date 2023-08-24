@@ -1,4 +1,4 @@
-# NextChat ![NextChat Logo](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjQ2RTUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1tZXNzYWdlcy1zcXVhcmUiPjxwYXRoIGQ9Ik0xNCA5YTIgMiAwIDAgMS0yIDJINmwtNCA0VjRjMC0xLjEuOS0yIDItMmg4YTIgMiAwIDAgMSAyIDJ2NVoiLz48cGF0aCBkPSJNMTggOWgyYTIgMiAwIDAgMSAyIDJ2MTFsLTQtNGgtNmEyIDIgMCAwIDEtMi0ydi0xIi8+PC9zdmc+)
+# NextChat ![NextChat Logo](https://ik.imagekit.io/goodslogger/next_chat_logo.png?tr=w-50)
 
 NextChat is an awesome realtime chat application built with Next.js, Redis, Pusher, Tailwind CSS, and NextAuth.js for seamless Google authentication.
 
