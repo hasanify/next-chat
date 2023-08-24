@@ -32,6 +32,6 @@ Contributions are welcome! If you have any cool ideas or find a bug, feel free t
 ## Connect with Us 🌐
 
 - Find us on GitHub: [@hasanify](https://github.com/hasanify)
-- Connect with me on NextChat: hasanify17.abps@gmail.com
+- Connect with me on NextChat: hasanify17@gmail.com
 
 Let's chat in real-time with NextChat! 🚀🎉
