@@ -14,7 +14,7 @@ NextChat is an awesome realtime chat application built with Next.js, Redis, Push
 
 1. Clone the repo: `git clone https://github.com/hasanify/next-chat.git`
 2. Install dependencies: `npm install`
-3. Set up environment variables
+3. Set up environment variables (check `.env.sample`)
 4. Run the development server: `npm run dev`
 
 ## Tech Stack 👨‍💻
