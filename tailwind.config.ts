@@ -16,10 +16,10 @@ const config: Config = {
     },
     extend: {
       colors: {
-        background: "#F9F9F9",
-        light: "#EBCBAE",
-        dark: "#8F8787",
-        accent: "#A6E4E7",
+        background: "#2B3467",
+        light: "#FCFFE7",
+        dark: "#BAD7E9",
+        accent: "#EB455F",
       },
     },
   },
