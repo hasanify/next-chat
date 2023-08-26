@@ -22,7 +22,9 @@ export const authOptions: NextAuthOptions = {
   adapter: UpstashRedisAdapter(db),
   session: {
     strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 1 day
   },
+
   pages: { signIn: "/login" },
   providers: [
     GoogleProvider({
