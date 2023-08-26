@@ -17,11 +17,11 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
   const [input, setInput] = useState<string>("");
 
   const sendMessage = async () => {
-    if (!input) return;
+    if (input.trim() === "") return;
     setIsLoading(true);
 
     try {
-      await axios.post("/api/message/send", { text: input, chatId });
+      await axios.post("/api/message/send", { text: input.trim(), chatId });
       setInput("");
       textareaRef.current?.focus();
     } catch {
@@ -32,11 +32,15 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
   };
 
   return (
-    <div className="border-t border-gray-200 px-4 pt-4 mb-4 sm:mb-2">
+    <div className="border-t border-gray-200 px-4 pt-4 -mb-10">
       <div className="relative flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
         <TextareaAutosize
           ref={textareaRef}
           onKeyDown={(e) => {
+            if (isLoading) {
+              e.preventDefault();
+              return;
+            }
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               sendMessage();
@@ -60,12 +64,10 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
           </div>
         </div>
 
-        <div className="absolute right-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
-          <div className="flex-shrink-0">
-            <Button isLoading={isLoading} onClick={sendMessage} type="submit">
-              Send
-            </Button>
-          </div>
+        <div className="absolute flex justify-center items-center bottom-0 right-0 mb-1 mr-1">
+          <Button isLoading={isLoading} onClick={sendMessage} type="submit">
+            Send
+          </Button>
         </div>
       </div>
     </div>

@@ -13,6 +13,9 @@ import { getFriendsByUserId } from "@/helpers/get-friends-by-id";
 import SidebarChatList from "@/components/SidebarChatList";
 import MobileChatLayout from "@/components/MobileChatLayout";
 
+import { Source_Code_Pro } from "next/font/google";
+const source_code_pro = Source_Code_Pro({ subsets: ["latin"] });
+
 interface LayoutProps {
   children: ReactNode;
 }
@@ -48,7 +51,7 @@ const Layout = async ({ children }: LayoutProps) => {
 
   return (
     <div className="w-full flex h-screen">
-      <div className=" md:hidden">
+      <div className="md:hidden">
         <MobileChatLayout
           friends={friends}
           session={session}
@@ -56,13 +59,19 @@ const Layout = async ({ children }: LayoutProps) => {
           unseenRequestCount={unseenRequestCount}
         />
       </div>
-      <div className="md:flex hidden h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
+      <div className="md:flex hidden h-full w-full max-w-max grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6">
         <Link
           href={"/dashboard"}
-          className="flex mx-auto px-3 gap-x-4 h-16 shrink-0 items-center"
+          className="flex mx-auto px-3 gap-x-4 h-16 pt-6 shrink-0 items-center"
         >
-          <Icons.MessagesSquareIcon className="w-8 h-8 text-indigo-600" />
-          <span className="text-2xl font-semibold">NextChat</span>
+          <div className=" flex mb-4 justify-center items-center font-semibold gap-2">
+            <h1
+              className={`text-3xl tracking-wide ${source_code_pro.className}`}
+            >
+              NextChat
+            </h1>
+            <Icons.MessagesSquareIcon className="text-accent h-8 w-8" />
+          </div>
         </Link>
 
         {friends.length > 0 ? (
@@ -86,13 +95,13 @@ const Layout = async ({ children }: LayoutProps) => {
                       <li key={option.id}>
                         <Link
                           href={option.href}
-                          className="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 group flex gap-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                          className="text-gray-200 hover:text-indigo-600 hover:bg-gray-200 group flex items-center gap-x-3 rounded-lg py-4 px-2 text-base leading-6 font-semibold"
                         >
-                          <span className="text-gray-400 border-gray-200 transition-all group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium ">
+                          <div className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium">
                             <Icon className="h-4 w-4" />
-                          </span>
+                          </div>
 
-                          <span className="truncate">{option.name}</span>
+                          {option.name}
                         </Link>
                       </li>
                     );
@@ -108,7 +117,7 @@ const Layout = async ({ children }: LayoutProps) => {
             </li>
 
             <li className="-mx-6 mt-auto flex items-center">
-              <div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm leading-6 text-gray-900">
+              <div className="flex flex-1 items-center font-semibold gap-x-4 px-6 py-3 text-sm leading-6 text-gray-100">
                 <div className="relative h-8 w-8">
                   <Image
                     fill
@@ -122,12 +131,14 @@ const Layout = async ({ children }: LayoutProps) => {
                 <span className="sr-only">Your Profile</span>
                 <div className="flex flex-col">
                   <span aria-hidden="true">{session.user.name}</span>
-                  <span className="text-xs text-zinc-400" aria-hidden="true">
+                  <span className="text-xs text-gray-300/80" aria-hidden="true">
                     {session.user.email}
                   </span>
                 </div>
               </div>
-              <SignOutButton className="h-full aspect-square" />
+            </li>
+            <li className="w-full -mt-5">
+              <SignOutButton />
             </li>
           </ul>
         </nav>

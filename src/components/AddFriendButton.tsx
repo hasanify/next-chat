@@ -12,6 +12,7 @@ interface AddFriendButtonProps {}
 
 const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   const [showSuccess, setshowSuccess] = useState<boolean>(false);
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   type FormData = z.infer<typeof addFriendValidator>;
 
@@ -25,6 +26,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   });
 
   const addFriend = async (email: string) => {
+    setisLoading(true);
     try {
       const validatedEmail = addFriendValidator.parse({ email });
 
@@ -45,6 +47,8 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
       }
 
       setError("email", { message: "Something went wrong." });
+    } finally {
+      setisLoading(false);
     }
   };
 
@@ -56,7 +60,7 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm">
       <label
         htmlFor="email"
-        className=" block text-sm font-medium leading-6 to-gray-900"
+        className=" block text-sm font-medium leading-6 text-gray-200"
       >
         Add friend by email
       </label>
@@ -65,10 +69,10 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
         <input
           {...register("email")}
           type="text"
-          className="block w-full rounded-lg border-0 text-gray-900 py-1.5 shadow-sm transition-all ring-2 ring-dark/60 outline-none border-none focus:outline-none focus:border-none focus:ring-accent focus:shadow-lg sm:text-sm sm:leading-6"
+          className="block w-full rounded-lg border-0 text-gray-900 py-1.5 shadow-sm transition-all ring-2 outline-none border-none focus:outline-none focus:border-none focus:ring-gray-200 focus:shadow-lg sm:text-sm sm:leading-6"
           placeholder="you@example.com"
         />
-        <Button>Add</Button>
+        <Button isLoading={isLoading}>{isLoading ? null : "Add"}</Button>
       </div>
 
       <p className="mt-1 text-sm text-red-500">{errors.email?.message}</p>

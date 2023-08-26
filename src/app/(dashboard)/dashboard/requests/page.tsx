@@ -25,8 +25,10 @@ const page = async ({}) => {
   );
 
   return (
-    <main className="pt-8">
-      <h1 className="font-bold text-4xl mb-8">Friend Requests</h1>
+    <main className="pt-4 md:pt-0">
+      <h1 className="font-medium text-3xl mb-8 md:-mt-8 text-gray-100">
+        Friend Requests
+      </h1>
       <div className="flex flex-col gap-4">
         <FriendRequests
           incomingFriendRequests={incomingFriendRequests}

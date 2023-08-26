@@ -13,7 +13,7 @@ const SignOutButton: FC<SignOutButtonProps> = ({ ...props }) => {
   return (
     <Button
       {...props}
-      variant="ghost"
+      className="w-max justify-between mb-4"
       onClick={async () => {
         setisSigningOut(true);
         try {
@@ -25,6 +25,7 @@ const SignOutButton: FC<SignOutButtonProps> = ({ ...props }) => {
         }
       }}
     >
+      Signout
       {isSigningOut ? (
         <Loader2 className="animate-spin h-4 w-4" />
       ) : (

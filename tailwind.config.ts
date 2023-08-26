@@ -20,6 +20,7 @@ const config: Config = {
         light: "#FCFFE7",
         dark: "#BAD7E9",
         accent: "#EB455F",
+        success: "#C8E4B2",
       },
     },
   },

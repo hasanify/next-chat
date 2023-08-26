@@ -50,13 +50,12 @@ const FriendRequestsSidebarOption: FC<FriendRequestsSidebarOptionProps> = ({
   return (
     <Link
       href="/dashboard/requests"
-      className="text-gray-700 hover:text-indigo-600 group flex items-center gap-x-3 rounded-lg p-2 text-sm leading-6 font-semibold"
+      className="text-gray-200 hover:text-indigo-600 hover:bg-gray-200 group flex items-center gap-x-3 rounded-lg py-4 px-2 text-base leading-6 font-semibold"
     >
-      <div className="text-gray-400 border-gray-200 transition-all group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium">
+      <div className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium">
         <User className="h-4 w-4" />
       </div>
-      <p className="truncate">Friend Requests</p>
-
+      Friend Requests
       {unseenRequestCount > 0 ? (
         <div className=" rounded-full w-6 h-6 text-xs flex justify-center items-center text-white bg-indigo-600">
           {unseenRequestCount}

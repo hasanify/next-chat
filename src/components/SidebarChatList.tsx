@@ -29,11 +29,10 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
 
     const newFriendHandler = (newFriend: User) => {
-      router.refresh();
+      setActiveChats((prev) => [...prev, newFriend]);
     };
 
     const chatHandler = (message: ExtendedMessage) => {
-      console.log(message);
       const shouldNotify =
         pathname !==
         `/dashboard/chat/${chatHrefConstructor(sessionId, message.senderId)}`;
@@ -82,9 +81,12 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
         }).length;
 
         return (
-          <li key={friend.id}>
+          <li
+            key={friend.id}
+            className="bg-gray-200 hover:bg-gray-200/90 text-gray-950 p-4 rounded-lg cursor-pointer"
+          >
             <a
-              className="text-gray-700 hover:text-indigo-600 group text-sm font-semibold group flex gap-x-2 items-center"
+              className=" group text-sm font-semibold group flex gap-x-2 items-center"
               href={`/dashboard/chat/${chatHrefConstructor(
                 sessionId,
                 friend.id
@@ -101,7 +103,7 @@ const SidebarChatList: FC<SidebarChatListProps> = ({ friends, sessionId }) => {
               <span className="text-sm">{friend.name}</span>
 
               {unseenMessagesCount > 0 ? (
-                <div className="rounded-full w-6 h-6 text-xs flex justify-center items-center text-white bg-indigo-600">
+                <div className="rounded-full w-6 h-6 text-xs flex justify-center items-center text-gray-200 bg-indigo-600">
                   {unseenMessagesCount}
                 </div>
               ) : null}
