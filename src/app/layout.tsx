@@ -6,7 +6,7 @@ import Providers from "../components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Next Chat",
+  title: "NextChat",
   description: "A realtime chat app made with NextJs!",
 };
 
@@ -17,6 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no"
+        />
+        <meta name="theme-color" content="#030712" />
+      </head>
       <body className={`${inter.className} bg-gray-950 text-light`}>
         <Providers>{children}</Providers>
       </body>

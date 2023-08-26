@@ -86,6 +86,7 @@ const LoginPage: FC<pageProps> = ({}) => {
               Login with Google
             </Button>
             <Image
+              priority
               className="mx-auto mt-6"
               width={300}
               height={300}
@@ -108,7 +109,14 @@ const Footer = () => {
         Made with
         <Heart className="text-accent fill-accent" />
       </div>
-      <a className="font-bold" href="https://github.com/hasanify">
+      <a
+        onContextMenu={(e) => {
+          e.preventDefault();
+        }}
+        className="font-bold hover:opacity-80"
+        href="https://github.com/hasanify"
+        target="_blank"
+      >
         github.com/hasanify
       </a>
     </footer>
