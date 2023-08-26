@@ -37,13 +37,13 @@ const LoginPage: FC<pageProps> = ({}) => {
           <div className="text-center lg:w-2/3 w-full">
             <div className=" flex mb-4 justify-center items-center font-semibold gap-2">
               <h1
-                className={`text-3xl tracking-wide sm:text-5xl ${source_code_pro.className}`}
+                className={`text-3xl text-gray-100 tracking-wide sm:text-5xl ${source_code_pro.className}`}
               >
                 NextChat
               </h1>
               <Icons.MessagesSquareIcon className="text-accent h-10 w-10 sm:h-14 sm:w-14" />
             </div>
-            <p className="mb-8 leading-relaxed">
+            <p className="mb-8 leading-relaxed text-gray-300">
               Fast, Lightweight and Secure!
             </p>
             <Button
