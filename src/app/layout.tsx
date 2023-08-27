@@ -20,6 +20,10 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta
+          name="google-site-verification"
+          content="14DgbqIjsLHaS01u1oaTmQhlK1jFytHRNX4odR2KcyQ"
+        />
+        <meta
           name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no"
         />
