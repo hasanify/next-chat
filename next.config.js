@@ -1,17 +1,16 @@
 /** @type {import('next').NextConfig} */
 
-const withPWA = require("next-pwa")({
-  disable: process.env.NODE_ENV === "development",
-  dest: "public",
-  register: true,
-  reloadOnOnline: true,
-  skipWaiting: true,
-});
+const withPWA = require("next-pwa");
 
 const nextConfig = {
+  ...withPWA({
+    disable: process.env.NODE_ENV === "development",
+    dest: "public",
+    register: true,
+    reloadOnOnline: true,
+    skipWaiting: true,
+  }),
   images: { domains: ["lh3.googleusercontent.com"] },
 };
 
-module.exports = withPWA({
-  nextConfig,
-});
+module.exports = nextConfig;

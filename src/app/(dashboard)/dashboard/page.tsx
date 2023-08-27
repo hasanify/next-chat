@@ -18,18 +18,23 @@ const page = async ({}) => {
 
   const friendsWithLastMessage = await Promise.all(
     friends.map(async (friend) => {
-      const [lastMessageRaw] = (await fetchRedis(
-        "zrange",
-        `chat:${chatHrefConstructor(session.user.id, friend.id)}:messages`,
-        -1,
-        -1
-      )) as string[];
-      const lastMessage = JSON.parse(lastMessageRaw) as Message;
+      try {
+        const [lastMessageRaw] = await fetchRedis(
+          "zrange",
+          `chat:${chatHrefConstructor(session.user.id, friend.id)}:messages`,
+          -1,
+          -1
+        );
 
-      return {
-        ...friend,
-        lastMessage,
-      };
+        const lastMessage = JSON.parse(lastMessageRaw) as Message;
+
+        return {
+          ...friend,
+          lastMessage,
+        };
+      } catch (error) {
+        return null;
+      }
     })
   );
 
@@ -51,63 +56,52 @@ const page = async ({}) => {
           </div>
         </div>
       ) : (
-        friendsWithLastMessage.map((friend) => (
-          <div
-            key={friend.id}
-            className="relative bg-gray-200 border border-zinc-200 p-3 rounded-md my-2"
-          >
-            <div className="absolute right-4 inset-y-0 flex items-center">
-              <ChevronRight className="h-7 w-7 text-zinc-400" />
-            </div>
-
-            <Link
-              href={`/dashboard/chat/${chatHrefConstructor(
-                session.user.id,
-                friend.id
-              )}`}
-              className="relative sm:flex"
+        friendsWithLastMessage.map((friend) => {
+          if (!friend) return;
+          return (
+            <div
+              key={friend.id}
+              className="relative bg-gray-200 border border-zinc-200 p-3 rounded-md my-2"
             >
-              <div className="mb-4 hidden sm:block flex-shrink-0 sm:mb-0 sm:mr-4">
-                <div className="relative h-6 w-6">
-                  <Image
-                    referrerPolicy="no-referrer"
-                    className="rounded-full"
-                    alt={`${friend.name} profile picture`}
-                    src={friend.image}
-                    fill
-                  />
-                </div>
+              <div className="absolute right-4 inset-y-0 flex items-center">
+                <ChevronRight className="h-7 w-7 text-zinc-400" />
               </div>
 
-              <div className="mb-1 flex gap-x-2 items-center sm:hidden flex-shrink-0">
-                <div className="relative h-8 w-8">
-                  <Image
-                    referrerPolicy="no-referrer"
-                    className="rounded-full"
-                    alt={`${friend.name} profile picture`}
-                    src={friend.image}
-                    fill
-                  />
+              <Link
+                href={`/dashboard/chat/${chatHrefConstructor(
+                  session.user.id,
+                  friend.id
+                )}`}
+                className="relative sm:flex"
+              >
+                <div className="mb-4 hidden sm:block flex-shrink-0 sm:mb-0 sm:mr-4">
+                  <div className="relative h-6 w-6">
+                    <Image
+                      referrerPolicy="no-referrer"
+                      className="rounded-full"
+                      alt={`${friend.name} profile picture`}
+                      src={friend.image}
+                      fill
+                    />
+                  </div>
                 </div>
-                <h4 className="text-lg font-bold text-gray-950">
-                  {friend.name}
-                </h4>
-              </div>
 
-              <p className="mt-1 sm:hidden max-w-md truncate text-gray-700">
-                <span className="font-bold">
-                  {friend.lastMessage.senderId === session.user.id
-                    ? "You: "
-                    : ""}
-                </span>
-                {friend.lastMessage.text}
-              </p>
+                <div className="mb-1 flex gap-x-2 items-center sm:hidden flex-shrink-0">
+                  <div className="relative h-8 w-8">
+                    <Image
+                      referrerPolicy="no-referrer"
+                      className="rounded-full"
+                      alt={`${friend.name} profile picture`}
+                      src={friend.image}
+                      fill
+                    />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-950">
+                    {friend.name}
+                  </h4>
+                </div>
 
-              <div className="hidden sm:block">
-                <h4 className="text-lg font-bold text-gray-950">
-                  {friend.name}
-                </h4>
-                <p className="mt-1 max-w-md truncate text-gray-700">
+                <p className="mt-1 sm:hidden max-w-md truncate text-gray-700">
                   <span className="font-bold">
                     {friend.lastMessage.senderId === session.user.id
                       ? "You: "
@@ -115,10 +109,24 @@ const page = async ({}) => {
                   </span>
                   {friend.lastMessage.text}
                 </p>
-              </div>
-            </Link>
-          </div>
-        ))
+
+                <div className="hidden sm:block">
+                  <h4 className="text-lg font-bold text-gray-950">
+                    {friend.name}
+                  </h4>
+                  <p className="mt-1 max-w-md truncate text-gray-700">
+                    <span className="font-bold">
+                      {friend.lastMessage.senderId === session.user.id
+                        ? "You: "
+                        : ""}
+                    </span>
+                    {friend.lastMessage.text}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          );
+        })
       )}
     </main>
   );
