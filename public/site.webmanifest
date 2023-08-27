@@ -1,6 +1,6 @@
 {
   "name": "NextChat",
-  "id": "NextChat",
+  "id": "nextchat-app",
   "description": "A realtime chat app made with NextJs!",
   "start_url": "/",
   "scope": "/",
