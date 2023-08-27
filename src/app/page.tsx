@@ -1,8 +1,9 @@
-import { db } from "@/lib/db";
-
 const Home = async () => {
-  await db.set("hello", "hello");
-  return <div className="text-xl font-extrabold">page</div>;
+  return (
+    <main className="text-4xl flex justify-center items-center font-bold">
+      NextChat
+    </main>
+  );
 };
 
 export default Home;
