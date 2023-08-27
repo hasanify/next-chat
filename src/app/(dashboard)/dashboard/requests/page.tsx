@@ -4,6 +4,10 @@ import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import FriendRequests from "@/components/FriendRequests";
 
+export async function generateMetadata({}) {
+  return { title: "NextChat | Requests" };
+}
+
 const page = async ({}) => {
   const session = await getServerSession(authOptions);
   if (!session) notFound();

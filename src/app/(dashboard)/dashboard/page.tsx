@@ -10,6 +10,10 @@ import { notFound } from "next/navigation";
 
 import Empty from "../../../../public/empty.svg";
 
+export async function generateMetadata({}) {
+  return { title: "NextChat | Dashboard" };
+}
+
 const page = async ({}) => {
   const session = await getServerSession(authOptions);
   if (!session) notFound();
